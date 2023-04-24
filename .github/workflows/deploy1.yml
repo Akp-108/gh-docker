@@ -12,18 +12,20 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container:  #this line is use to create a docker environment 
-      image: node:16
+    # container:  #this line is use to create a docker environment 
+    #   image: node:16
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
       # MONGODB_CLUSTER_ADDRESS: cluster0.kbhjwv0.mongodb.net
-      MONGODB_CLUSTER_ADDRESS: mongodb
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
     services:
       mongodb: 
         image: mongo  #this is the offical mongo image that is present on docker hub
+        ports:
+          - 27017:27017
         env: 
            MONGO_INITDB_ROOT_USERNAME: root    #this is the defalut id and password for mongo     
            MONGO_INITDB_ROOT_PASSWORD: example
